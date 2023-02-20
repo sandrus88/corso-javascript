@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="style.css" />
+<title>Gioco della morra cinese</title>
+</head>
+<body>
+	<header>
+		<h1>Chinese Morra</h1>
+		<button class="btn new-game">New Game</button>
+	</header>
+	<main>
+		<div class="buttons">
+			<button class="btn put" id="paper">paper</button>
+			<button class="btn put" id="scissors">scissors</button>
+			<button class="btn put" id="rock">rock</button>
+		</div>
+		<div class="end-game">Start the game!</div>
+		<section class="left">
+			<img src="morra-1.png" class="number" id="number-left" />
+			<p class="label-score">
+				Score player 1: <span class="score" id="score0">20</span>
+			</p>
+		</section>
+		<section class="right">
+			<img src="morra-1.png" class="number" id="number-right" />
+			<p class="label-score">
+				Score player 2: <span class="score" id="score1">20</span>
+			</p>
+		</section>
+	</main>
+	<script src="morraScript.js"></script>
+</body>
+</html>
