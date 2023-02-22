@@ -640,5 +640,183 @@ console.log(question.get(question.get("correct") === answer));
 console.log([...question]);
 */
 //////////////////////////////////////////////////////////////////
-//
+//Working with strings
+/*
+const airline = "TAP Air Portugal";
+const plane = "A320";
+//come per gli array anche nell stringhe si può ottenere ogni lettere
+//tramite la posizione
 
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+//lo si può ottenere passando la stringa direttamente 
+console.log("B737"[0]);
+
+//si può ottenere la lunghezza della stringa
+console.log(airline.length);
+console.log("B737".length);
+
+//si puè estrarre l'indice di ogni lettera
+console.log(airline.indexOf("r"));//questo restituisce la prima r che
+//si incontra, se invece volessimo ottenere l'ultima r (se presente)
+console.log(airline.lastIndexOf("r"));
+//un caso d'uso utile per manipolare gli indici di una stringa
+//può essere l'estrazione parziale di una stringa tramite il metodo
+//slice()
+console.log(airline.slice(4));//stampa una nuova stringa dalla posizione 4
+console.log(airline.slice(4, 7));//stampa una nuova stringa compresa tra la posizione 4 e la 7(esclusa)
+
+console.log(airline.slice(0, airline.indexOf(" ")));
+console.log(airline.slice(airline.lastIndexOf(" ") + 1));
+//mettendo un indice negativo estrarrà dalla fine della stringa
+//verso l'inizio ad esempio
+console.log(airline.slice(-2));//stampa una nuova stringa al
+console.log(airline.slice(-8));//stampa una nuova stringa Portugal
+console.log(airline.slice(0, -1));
+console.log(airline.slice(2, -2));
+
+//creo una funzione in cui passto un posto a sedere in aereo
+//verifico se è un posto che sta in mezzo o no
+const checkMiddleSeat = function(seat) {
+	//B e E sono i posti in mezzo
+	const s = seat.slice(-1);//è una stringa contenente l'ultima lettera
+	if (s === "B" || s === "E") console.log("You got the middle seat");
+	else console.log("You got lucky");
+};
+
+checkMiddleSeat("11B");
+checkMiddleSeat("23C");
+checkMiddleSeat("3E");
+
+console.log(airline.toLowerCase());//stampa una nuova stringa tutta i minuscolo
+console.log(airline.toUpperCase());//stampa una nuova stringa tutta i maiuscolo
+
+//esempio di correggere una stringa scritta errata
+const capitalization = function(string) {
+	//primo passo è rendere tutto in minuscolo
+	const passengerLower = string.toLowerCase();
+	const passengerCorrect = passengerLower[0].toUpperCase().concat(passengerLower.slice(1));
+	console.log(passengerCorrect);
+};
+capitalization("jOnAS");
+
+//esempio sul confronto di email 
+const email = "hello@jonas.io";
+const loginEmail = "  Hello@Jonas.Io \n";
+
+//const lowerEmail = loginEmail.toLowerCase();
+//const trimmedEmail = lowerEmail.trim();//elimina gli spazi vuoti
+//console.log(trimmedEmail);
+
+//si può evitare di creare due variabili lowerEmail e trimmedEmail
+// per normalizzare la stringa
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+//sostituire una stringa
+const priceGB = "288,97£"
+const priceUS = priceGB.replace("£", "$").replace(",", ".");
+console.log(priceUS);
+
+const announcement = "All passengers come to boarding door 23. Boarding door 23!"
+
+console.log(announcement.replace("door", "gate"));//replace sosituisce solo una parola
+//se si vuole sosituire tutte la parole passate come parametro e
+//presenti nella stringa si usa replaceAll 
+console.log(announcement.replaceAll("door", "gate"));
+
+//metodi che restituiscono booleans
+const plane1 = "A320neo";
+console.log(plane1.includes("A320"));
+console.log(plane1.includes("Boeing"));
+
+console.log(plane1.startsWith("Air"));
+console.log(plane1.startsWith("A3"));
+
+console.log(plane1.endsWith("Air"));
+console.log(plane1.endsWith("neo"));
+
+//esempio vedere se i bagagli possono fare il check-in
+const checkBaggage = function(items) {
+	const baggage = items.toLowerCase();
+	if(baggage.includes("knife") || baggage.includes("gun")) {
+		console.log("You are NOT  allowed on board");
+	} else {
+		console.log("Welcome on aboard!");
+	}
+};
+
+checkBaggage("I have a laptop, some Food an a pocket Knife");
+checkBaggage("Socks and camera");
+checkBaggage("Got some snacks and a gun for protection");
+
+//il metodo più potente delle stringhe è sicuramente split()
+//che consente di dividere una stringa in più stringhe, divise 
+//da una stringa "divisoria", il metodo split ritorna un array 
+//contenetente le stringhe divise
+
+console.log("a+very+nice+string".split("+"));
+console.log("Jonas Schmedtmann".split(" "));
+
+const [firstName, lastName] = "Jonas Schmedtmann".split(" ");
+//adesso vogliamo rendere il cognome maiuscolo e aggiungere 
+//la string Mr.
+
+const newName = ["Mr.", firstName, lastName.toUpperCase()].join(" ");
+console.log(newName);
+
+const capitalizeName = function(name) {
+	const names = name.split(" ");
+	const namesUpper = [];
+	for(const n of names) {
+//		namesUpper.push(n[0].toUpperCase() + n.slice(1));
+		namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+	}
+	console.log(namesUpper.join(" "));
+};
+
+capitalizeName("jessica ann smith davis");
+capitalizeName("jonas schmedtmann");
+
+//imbottire una stringa
+const message = "Go to gate 23";
+console.log(message.padStart(20, "+"));//con questo metodo
+//possiamo rendere una stringa più lunga partendo dall'inizio e 
+//riempirl con la stringa passata come parametro, quindi in 
+//questo caso, stamperà una nuova stringa con 12 + all'inizio più
+//la stringa message 
+console.log("Jonas".padStart(20, "+"));
+
+console.log(message.padEnd(20, "+"));
+console.log(message.padStart(20, "+").padEnd(30, "+"));//in questo caso
+//poichè la lunghezza è stata già dichiarata con padStart, il secondo metodo
+//padEnd parte da una lunghezza di 20 quindi arriva fino a 30 aggiunngendo
+//alla fine 10 +
+
+//esempio generalmente in rete quando si visualizza il numero di 
+//una carta di credito si vedono le ultime 4 cifre precedute da
+//dei simboli, vogliamo ricreare questo
+const maskCreditCard = function(number) {
+	const str = number + "";
+	const last = str.slice(-4);//con questo prendiamo le ultime quattro cifre
+	return last.padStart(str.length, "*");
+};
+
+console.log(maskCreditCard(43378463864647384));
+console.log(maskCreditCard("346553245324576635"));
+
+//metodo repeat() permette di ripetere più volte una stringa
+const message2 = "Bad weather... All Departures Delayed...";
+console.log(message2.repeat(5));
+
+const planesInLine = function(n) {
+	console.log(`There are ${n} planes in line ${"plane".repeat(n)}`);
+};
+
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+*/
+/////////////////////////////////////////////////////////////////
