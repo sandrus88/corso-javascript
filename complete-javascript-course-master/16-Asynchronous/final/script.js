@@ -482,7 +482,6 @@ const whereAmI = async function () {
       `https://restcountries.eu/rest/v2/name/${dataGeo.country}`
     );
     
-    // BUG in video:
     // if (!resGeo.ok) throw new Error('Problem getting country');
     
     // FIX:
